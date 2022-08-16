@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">openphonezapp</string>
+    <string name="floating_button_add">Add Contact</string>
+    <string name="image_view_contact">Image Contact</string>
+    <string name="image_view_call">Call</string>
+    <string name="image_view_whatsapp">WhatsApp</string>
+    <string name="menu_search">Search</string>
 </resources>

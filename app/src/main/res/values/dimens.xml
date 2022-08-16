@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="layout_margin_max">16dp</dimen>
+    <dimen name="layout_margin_min">8dp</dimen>
+    <dimen name="card_view_elevation_max">10dp</dimen>
+    <dimen name="card_view_corners_max">15dp</dimen>
+    <dimen name="image_view_contact_size">96dp</dimen>
+    <dimen name="text_size_max">20sp</dimen>
+    <dimen name="text_size_min">14sp</dimen>
+</resources>
