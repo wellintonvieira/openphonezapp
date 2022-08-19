@@ -1,81 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.circularreveal.cardview.CircularRevealCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view_items"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/layout_margin_min"
-    android:layout_marginTop="@dimen/layout_margin_min"
-    android:layout_marginEnd="@dimen/layout_margin_min"
-    app:cardCornerRadius="@dimen/card_view_corners_max"
-    app:cardElevation="@dimen/card_view_elevation_max">
+    android:layout_margin="@dimen/layout_margin_min"
+    app:cardBackgroundColor="@color/primary_400"
+    app:cardCornerRadius="@dimen/card_view_radius_min"
+    app:cardElevation="@dimen/card_view_elevation_min"
+    app:cardMaxElevation="@dimen/card_view_elevation_max">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_view_contact_phone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout_margin_max"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_view_size_med"
+        tools:text="(00) 0 0000-0000" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_view_contact"
-            android:layout_width="@dimen/image_view_contact_size"
-            android:layout_height="@dimen/image_view_contact_size"
-            android:contentDescription="@string/image_view_contact"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_view_contact_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/layout_margin_min"
-            android:layout_marginTop="@dimen/layout_margin_min"
-            android:layout_marginEnd="@dimen/layout_margin_min"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            android:textSize="@dimen/text_size_max"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image_view_contact"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Contact name" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/text_view_contact_phone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            android:textSize="@dimen/text_size_min"
-            app:layout_constraintEnd_toEndOf="@+id/text_view_contact_name"
-            app:layout_constraintStart_toStartOf="@+id/text_view_contact_name"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_contact_name"
-            tools:text="(00) 0 0000-0000" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_view_whatsapp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/layout_margin_max"
-            android:contentDescription="@string/image_view_whatsapp"
-            android:tint="@color/tint"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_round_whatsapp" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_view_call"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/layout_margin_min"
-            android:contentDescription="@string/image_view_call"
-            android:tint="@color/tint"
-            app:layout_constraintBottom_toBottomOf="@+id/image_view_whatsapp"
-            app:layout_constraintEnd_toStartOf="@+id/image_view_whatsapp"
-            app:srcCompat="@drawable/ic_round_call" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+</com.google.android.material.card.MaterialCardView>

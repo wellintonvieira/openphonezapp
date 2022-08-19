@@ -1,7 +1,7 @@
 package br.com.wellintonvieira.openphonezapp.data.di
 
-import br.com.wellintonvieira.openphonezapp.data.repository.ContactRepositoryImpl
-import br.com.wellintonvieira.openphonezapp.data.source.ContactDatabase
+import br.com.wellintonvieira.openphonezapp.data.repositories.ContactRepositoryImpl
+import br.com.wellintonvieira.openphonezapp.data.sources.ContactDatabase
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 

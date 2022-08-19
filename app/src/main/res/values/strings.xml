@@ -1,8 +1,12 @@
 <resources>
-    <string name="app_name">openphonezapp</string>
-    <string name="floating_button_add">Add Contact</string>
-    <string name="image_view_contact">Image Contact</string>
-    <string name="image_view_call">Call</string>
-    <string name="image_view_whatsapp">WhatsApp</string>
-    <string name="menu_search">Search</string>
+    <string name="app_name">Open Phone Zapp</string>
+
+    <string name="text_input_contact">Insert phone number here…</string>
+    <string name="phone_number_empty">Phone number cannot be empty</string>
+    <string name="floating_button_whatsapp">Open phone number in whatsapp</string>
+
+    <string name="view_pager">View Pager</string>
+    <string name="tab_title_phone">Phone</string>
+    <string name="tab_title_registers">Registers</string>
+    <string name="tab_title_contacts">Contacts</string>
 </resources>

@@ -1,4 +1,4 @@
-package br.com.wellintonvieira.openphonezapp.data.source
+package br.com.wellintonvieira.openphonezapp.data.sources
 
 import android.content.Context
 import androidx.room.Database
