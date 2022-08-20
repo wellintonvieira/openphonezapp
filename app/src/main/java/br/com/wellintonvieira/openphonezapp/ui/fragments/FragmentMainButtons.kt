@@ -8,7 +8,7 @@ class FragmentMainButtons(
     private val mainFragmentViewModel: MainFragmentViewModel
 ) {
 
-    fun configureOnClickListeners() {
+    fun configureNumbersButtons() {
         binding.button0.setOnClickListener {
             mainFragmentViewModel.add(0)
         }
@@ -42,7 +42,7 @@ class FragmentMainButtons(
         }
 
         binding.button8.setOnClickListener {
-            mainFragmentViewModel.add(9)
+            mainFragmentViewModel.add(8)
         }
 
         binding.button9.setOnClickListener {
@@ -51,6 +51,10 @@ class FragmentMainButtons(
 
         binding.buttonBackspace.setOnClickListener {
             mainFragmentViewModel.remove()
+        }
+
+        binding.buttonClear.setOnClickListener {
+            mainFragmentViewModel.clear()
         }
     }
 }
