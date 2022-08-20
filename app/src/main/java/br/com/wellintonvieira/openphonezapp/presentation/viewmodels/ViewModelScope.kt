@@ -6,4 +6,5 @@ interface ViewModelScope<T> {
     fun insert(item: T): Job
     fun delete(item: T): Job
     fun load()
+    fun load(query: String)
 }

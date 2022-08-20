@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import br.com.wellintonvieira.openphonezapp.R
 import br.com.wellintonvieira.openphonezapp.databinding.ActivityMainBinding
 import br.com.wellintonvieira.openphonezapp.ui.adapters.PageAdapter
-import br.com.wellintonvieira.openphonezapp.ui.fragments.ContactsFragment
+import br.com.wellintonvieira.openphonezapp.ui.fragments.HistoryFragment
 import br.com.wellintonvieira.openphonezapp.ui.fragments.MainFragment
 
 class MainActivity : AppCompatActivity() {
@@ -22,8 +22,12 @@ class MainActivity : AppCompatActivity() {
     private fun configureViewPager() {
         val pageAdapter = PageAdapter(supportFragmentManager)
         pageAdapter.addFragment(MainFragment(), getString(R.string.tab_title_phone))
-        pageAdapter.addFragment(ContactsFragment(), getString(R.string.tab_title_contacts))
+        pageAdapter.addFragment(HistoryFragment(), getString(R.string.tab_title_history))
         binding.viewPagerMain.adapter = pageAdapter
         binding.tabLayoutMain.setupWithViewPager(binding.viewPagerMain)
+    }
+
+    fun currentItem() {
+        binding.viewPagerMain.currentItem = 2
     }
 }

@@ -4,10 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "contact")
-data class Contact(
+@Entity(tableName = "history")
+data class History(
     @PrimaryKey(autoGenerate = true)
-    var id: Long = 0,
     @ColumnInfo(name = "phone_number")
-    var phoneNumber: String = ""
+    var phoneNumber: Long = 0
 )

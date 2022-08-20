@@ -9,33 +9,76 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_view_main_phone_number"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_margin_med"
         android:ellipsize="end"
         android:hint="@string/text_view_phone_number"
-        android:textColorHint="@color/primary_200"
         android:maxLines="1"
         android:textAlignment="center"
         android:textColor="@android:color/white"
+        android:textColorHint="@color/primary_200"
         android:textIsSelectable="true"
-        android:textSize="@dimen/text_view_size_max"
+        android:textSize="@dimen/text_view_size_med"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guide_line_fragment_main"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_view_phone_number_add"
+        android:layout_width="@dimen/image_view_call"
+        android:layout_height="@dimen/image_view_call"
+        android:layout_marginEnd="@dimen/layout_margin_max"
+        android:tint="@color/secondary_200"
+        app:layout_constraintBottom_toBottomOf="@+id/floating_button_open_whatsapp"
+        app:layout_constraintEnd_toStartOf="@+id/floating_button_open_whatsapp"
+        app:layout_constraintTop_toTopOf="@+id/floating_button_open_whatsapp"
+        app:srcCompat="@drawable/ic_round_contact_add" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_button_open_whatsapp"
+        android:layout_width="@dimen/floating_button_whatsapp"
+        android:layout_height="@dimen/floating_button_whatsapp"
+        android:layout_margin="@dimen/layout_margin_med"
+        android:contentDescription="@string/floating_button_whatsapp"
+        android:src="@drawable/ic_round_whatsapp"
+        app:fabCustomSize="@dimen/floating_button_whatsapp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guide_line_fragment_main"
+        app:maxImageSize="@dimen/image_view_icon_size"
+        app:tint="@color/primary_500" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_view_call_phone_number"
+        android:layout_width="@dimen/image_view_call"
+        android:layout_height="@dimen/image_view_call"
+        android:layout_marginStart="@dimen/layout_margin_max"
+        android:tint="@color/secondary_200"
+        app:layout_constraintBottom_toBottomOf="@+id/floating_button_open_whatsapp"
+        app:layout_constraintStart_toEndOf="@+id/floating_button_open_whatsapp"
+        app:layout_constraintTop_toTopOf="@+id/floating_button_open_whatsapp"
+        app:srcCompat="@drawable/ic_round_call" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_line_fragment_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/layout_margin_med"
         app:cardBackgroundColor="@color/primary_400"
         app:cardCornerRadius="@dimen/card_view_radius_min"
         app:cardElevation="@dimen/card_view_elevation_min"
         app:cardMaxElevation="@dimen/card_view_elevation_max"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guide_line_fragment_main"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_main_phone_number">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -59,7 +102,6 @@
                 android:id="@+id/button_2"
                 android:layout_width="@dimen/material_button_size"
                 android:layout_height="@dimen/material_button_size"
-                android:layout_marginTop="@dimen/layout_margin_med"
                 android:text="2"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_view_size_med"
@@ -169,12 +211,10 @@
                 android:id="@+id/button_0"
                 android:layout_width="@dimen/material_button_size"
                 android:layout_height="@dimen/material_button_size"
-                android:layout_marginBottom="@dimen/layout_margin_med"
                 android:text="0"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_view_size_med"
                 app:cornerRadius="@dimen/card_view_radius_max"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/button_8"
                 app:layout_constraintStart_toStartOf="@+id/button_8"
                 app:layout_constraintTop_toBottomOf="@+id/button_8"
@@ -211,41 +251,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image_view_phone_number_add"
-        android:layout_width="@dimen/image_view_call"
-        android:layout_height="@dimen/image_view_call"
-        android:layout_marginEnd="@dimen/layout_margin_max"
-        android:tint="@color/secondary_200"
-        app:layout_constraintBottom_toBottomOf="@+id/floating_button_open_whatsapp"
-        app:layout_constraintEnd_toStartOf="@+id/floating_button_open_whatsapp"
-        app:layout_constraintTop_toTopOf="@+id/floating_button_open_whatsapp"
-        app:srcCompat="@drawable/ic_round_contact_add" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floating_button_open_whatsapp"
-        android:layout_width="@dimen/floating_button_whatsapp"
-        android:layout_height="@dimen/floating_button_whatsapp"
-        android:layout_margin="@dimen/layout_margin_med"
-        android:contentDescription="@string/floating_button_whatsapp"
-        android:src="@drawable/ic_round_whatsapp"
-        app:fabCustomSize="@dimen/floating_button_whatsapp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialCardView"
-        app:maxImageSize="@dimen/image_view_icon_size"
-        app:tint="@color/primary_500" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image_view_call_phone_number"
-        android:layout_width="@dimen/image_view_call"
-        android:layout_height="@dimen/image_view_call"
-        android:layout_marginStart="@dimen/layout_margin_max"
-        android:tint="@color/secondary_200"
-        app:layout_constraintBottom_toBottomOf="@+id/floating_button_open_whatsapp"
-        app:layout_constraintStart_toEndOf="@+id/floating_button_open_whatsapp"
-        app:layout_constraintTop_toTopOf="@+id/floating_button_open_whatsapp"
-        app:srcCompat="@drawable/ic_round_call" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

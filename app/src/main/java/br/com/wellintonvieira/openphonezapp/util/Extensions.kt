@@ -1,9 +1,13 @@
 package br.com.wellintonvieira.openphonezapp.util
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.provider.ContactsContract
+import android.view.View
 import androidx.fragment.app.Fragment
+import br.com.wellintonvieira.openphonezapp.R
+import com.google.android.material.snackbar.Snackbar
 
 fun Fragment.openIntent(action: String, phoneNumber: String) {
     val intent = when(action) {
@@ -24,5 +28,15 @@ fun Fragment.openIntent(action: String, phoneNumber: String) {
             }
         }
     }
-    startActivity(intent)
+    try {
+        startActivity(intent)
+    } catch (exception: ActivityNotFoundException) {
+        view?.let {
+            showSnack(it, getString(R.string.activity_not_found_exception, exception.message))
+        }
+    }
+}
+
+fun showSnack(view: View, message: String) {
+    Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
 }

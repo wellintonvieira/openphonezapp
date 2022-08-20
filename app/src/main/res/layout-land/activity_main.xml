@@ -17,19 +17,31 @@
             android:id="@+id/material_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:layout_scrollFlags="scroll|enterAlways"
+            android:contentInsetStart="0dp"
+            android:contentInsetLeft="0dp"
+            android:contentInsetEnd="0dp"
+            android:contentInsetRight="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
             app:navigationIconTint="@android:color/white"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout_main"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/primary_500"
-            app:tabBackground="@color/primary_500"
-            app:tabIndicatorColor="@color/secondary_200"
-            app:tabIndicatorHeight="@dimen/tab_indicator_height"
-            app:tabTextColor="@android:color/white" />
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primary_500"
+                app:tabBackground="@color/primary_500"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/secondary_200"
+                app:tabIndicatorHeight="@dimen/tab_indicator_height"
+                app:tabMaxWidth="0dp"
+                app:tabMode="fixed"
+                app:tabTextColor="@android:color/white" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -37,7 +49,6 @@
         android:id="@+id/view_pager_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/transparent"
         android:contentDescription="@string/view_pager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
