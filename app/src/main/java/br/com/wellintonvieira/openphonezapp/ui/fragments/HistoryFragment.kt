@@ -1,6 +1,5 @@
 package br.com.wellintonvieira.openphonezapp.ui.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
@@ -24,20 +23,11 @@ class HistoryFragment: Fragment(), MenuProvider, SearchView.OnQueryTextListener 
     private val historyViewModel by viewModel<HistoryFragmentViewModel>()
     private val historyAdapter by lazy { HistoryAdapter(this::historyClickListener) }
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
         requireActivity().addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
         configureRecyclerView()
-        historyViewModel.load()
-        historyViewModel.items.observe(viewLifecycleOwner) {
-            if(it.isEmpty()) {
-                hideImageHistory(true)
-            } else {
-                hideImageHistory(false)
-                historyAdapter.setItems(it)
-            }
-        }
+        configureObserver()
         return binding.root
     }
 
@@ -46,6 +36,18 @@ class HistoryFragment: Fragment(), MenuProvider, SearchView.OnQueryTextListener 
             layoutManager = LinearLayoutManager(this@HistoryFragment.context)
             setHasFixedSize(true)
             adapter = historyAdapter
+        }
+    }
+
+    private fun configureObserver() {
+        historyViewModel.load()
+        historyViewModel.items.observe(viewLifecycleOwner) {
+            if(it.isEmpty()) {
+                hideImageHistory(true)
+            } else {
+                hideImageHistory(false)
+                historyAdapter.submitList(it)
+            }
         }
     }
 
@@ -77,7 +79,7 @@ class HistoryFragment: Fragment(), MenuProvider, SearchView.OnQueryTextListener 
     override fun onQueryTextChange(newText: String?): Boolean {
         newText?.let { historyViewModel.load(it) }
         historyViewModel.itemsFilter.observe(viewLifecycleOwner) {
-            historyAdapter.setItems(it)
+            historyAdapter.submitList(it)
         }
         return true
     }
