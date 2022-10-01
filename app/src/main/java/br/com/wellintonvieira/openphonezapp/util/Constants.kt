@@ -6,4 +6,5 @@ object Constants {
     const val ACTION_CALL = "call"
     const val ACTION_CONTACT = "contact"
     const val ACTION_WHATSAPP = "whatsapp"
+    const val ACTION_BUSINESS = "business"
 }

@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding.tabLayoutMain.setupWithViewPager(binding.viewPagerMain)
     }
 
-    fun currentItem() {
-        binding.viewPagerMain.currentItem = 2
+    fun currentItem(currentItem: Int) {
+        binding.viewPagerMain.currentItem = currentItem
     }
 }

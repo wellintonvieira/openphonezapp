@@ -6,6 +6,7 @@
 
     <dimen name="floating_button_whatsapp">56dp</dimen>
     <dimen name="material_button_size">70dp</dimen>
+    <dimen name="image_view_paste">30dp</dimen>
     <dimen name="image_view_call">36dp</dimen>
     <dimen name="image_view_history">100dp</dimen>
     <dimen name="image_view_icon_size">30dp</dimen>

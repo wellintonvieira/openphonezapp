@@ -22,9 +22,16 @@ fun Fragment.openIntent(action: String, phoneNumber: String) {
                 putExtra(ContactsContract.Intents.Insert.PHONE, phoneNumber)
             }
         }
+        Constants.ACTION_WHATSAPP -> {
+            Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("${Constants.WHATSAPP_API}$phoneNumber")
+                setPackage("com.whatsapp")
+            }
+        }
         else -> {
             Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse("${Constants.WHATSAPP_API}$phoneNumber")
+                setPackage("com.whatsapp.w4b")
             }
         }
     }

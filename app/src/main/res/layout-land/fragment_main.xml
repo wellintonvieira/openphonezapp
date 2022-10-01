@@ -7,8 +7,18 @@
     android:layout_height="match_parent"
     android:background="@color/primary_500">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image_view_phone_number_paste"
+        android:layout_width="@dimen/image_view_paste"
+        android:layout_height="@dimen/image_view_paste"
+        android:layout_margin="@dimen/layout_margin_med"
+        android:tint="@color/primary_200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_round_content_paste" />
+
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/text_view_main_phone_number"
+        android:id="@+id/text_view_phone_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/layout_margin_med"
@@ -20,9 +30,10 @@
         android:textColorHint="@color/primary_200"
         android:textIsSelectable="true"
         android:textSize="@dimen/text_view_size_med"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view_phone_number_paste"
+        app:layout_constraintEnd_toStartOf="@+id/image_view_phone_number_paste"
         app:layout_constraintStart_toStartOf="@+id/guide_line_fragment_main"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/image_view_phone_number_paste" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/image_view_phone_number_add"

@@ -1,6 +1,8 @@
 package br.com.wellintonvieira.openphonezapp.ui.fragments
 
 import android.Manifest
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import br.com.wellintonvieira.openphonezapp.data.models.History
 import br.com.wellintonvieira.openphonezapp.databinding.FragmentMainBinding
 import br.com.wellintonvieira.openphonezapp.presentation.viewmodels.HistoryFragmentViewModel
 import br.com.wellintonvieira.openphonezapp.presentation.viewmodels.MainFragmentViewModel
+import br.com.wellintonvieira.openphonezapp.util.BottomSheetWhatsapp
 import br.com.wellintonvieira.openphonezapp.util.Constants
 import br.com.wellintonvieira.openphonezapp.util.openIntent
 import br.com.wellintonvieira.openphonezapp.util.showSnack
@@ -23,6 +26,7 @@ class MainFragment : Fragment() {
     private lateinit var fragmentButtons: MainFragmentButtons
     private val mainFragmentViewModel by viewModel<MainFragmentViewModel>()
     private val historyViewModel by viewModel<HistoryFragmentViewModel>()
+    private val bottomSheetWhatsapp by lazy { BottomSheetWhatsapp(this::openIntent) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
@@ -35,22 +39,40 @@ class MainFragment : Fragment() {
         fragmentButtons.configureNumbersButtons()
 
         mainFragmentViewModel.text.observe(viewLifecycleOwner) {
-            binding.textViewMainPhoneNumber.text = it
+            binding.textViewPhoneNumber.text = it
         }
         configureListeners()
     }
 
     private fun configureListeners() {
         binding.floatingButtonOpenWhatsapp.setOnClickListener {
-            openIntent(Constants.ACTION_WHATSAPP)
+            val phoneNumber = binding.textViewPhoneNumber.text
+            if (phoneNumber.isNotEmpty()) {
+                bottomSheetWhatsapp.create(binding.root.context)
+            }
+        }
+
+        binding.imageViewPhoneNumberPaste.setOnClickListener {
+            val clipboard = binding.root.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val text = clipboard.primaryClip?.getItemAt(0)
+            if (text != null) {
+                val phoneNumber = text.text.toString().replace("[^0-9]".toRegex(), "")
+                binding.textViewPhoneNumber.text = phoneNumber.trim()
+            }
         }
 
         binding.imageViewCallPhoneNumber.setOnClickListener {
-            requestPermission.launch(Manifest.permission.CALL_PHONE)
+            val phoneNumber = binding.textViewPhoneNumber.text
+            if (phoneNumber.isNotEmpty()) {
+                requestPermission.launch(Manifest.permission.CALL_PHONE)
+            }
         }
 
         binding.imageViewPhoneNumberAdd.setOnClickListener {
-            openIntent(Constants.ACTION_CONTACT)
+            val phoneNumber = binding.textViewPhoneNumber.text
+            if (phoneNumber.isNotEmpty()) {
+                openIntent(Constants.ACTION_CONTACT)
+            }
         }
 
         binding.buttonBackspace.setOnClickListener {
@@ -72,7 +94,7 @@ class MainFragment : Fragment() {
     }
 
     private fun openIntent(action: String) {
-        val phoneNumber = binding.textViewMainPhoneNumber.text
+        val phoneNumber = binding.textViewPhoneNumber.text
         if (phoneNumber.isNotEmpty()) {
             openIntent(action, "$phoneNumber")
             insertPhoneNumber("$phoneNumber")

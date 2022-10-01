@@ -13,15 +13,18 @@ import br.com.wellintonvieira.openphonezapp.databinding.FragmentHistoryBinding
 import br.com.wellintonvieira.openphonezapp.presentation.viewmodels.HistoryFragmentViewModel
 import br.com.wellintonvieira.openphonezapp.ui.MainActivity
 import br.com.wellintonvieira.openphonezapp.ui.adapters.HistoryAdapter
+import br.com.wellintonvieira.openphonezapp.util.BottomSheetWhatsapp
 import br.com.wellintonvieira.openphonezapp.util.Constants
 import br.com.wellintonvieira.openphonezapp.util.openIntent
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HistoryFragment: Fragment(), MenuProvider, SearchView.OnQueryTextListener {
 
+    private lateinit var history: History
     private lateinit var binding: FragmentHistoryBinding
     private val historyViewModel by viewModel<HistoryFragmentViewModel>()
     private val historyAdapter by lazy { HistoryAdapter(this::historyClickListener) }
+    private val bottomSheetWhatsapp by lazy { BottomSheetWhatsapp(this::openIntent) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
@@ -53,8 +56,21 @@ class HistoryFragment: Fragment(), MenuProvider, SearchView.OnQueryTextListener 
 
     private fun historyClickListener(history: History, action: String) {
         when(action) {
-            "click" -> openIntent(Constants.WHATSAPP_API, "${history.phoneNumber}")
+            "click" -> {
+                this.history = history
+                bottomSheetWhatsapp.create(binding.root.context)
+            }
             "delete" -> historyViewModel.delete(history)
+        }
+    }
+
+    private fun openIntent(action: String) {
+        when(action) {
+            Constants.ACTION_WHATSAPP -> {
+                openIntent(Constants.ACTION_WHATSAPP, "${history.phoneNumber}")
+            } else -> {
+                openIntent(Constants.ACTION_BUSINESS, "${history.phoneNumber}")
+            }
         }
     }
 
@@ -65,11 +81,12 @@ class HistoryFragment: Fragment(), MenuProvider, SearchView.OnQueryTextListener 
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        if (menuItem.itemId == R.id.menu_search) {
-            (activity as MainActivity).currentItem()
-            return true
+        return if(menuItem.itemId == R.id.menu_search) {
+            (activity as MainActivity).currentItem(2)
+            true
+        } else {
+            false
         }
-        return false
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

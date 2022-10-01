@@ -7,6 +7,8 @@
     <string name="tab_title_phone">Phone</string>
     <string name="tab_title_history">History</string>
     <string name="history_app">Your app history appears here</string>
+    <string name="text_view_whatsapp">Whatsapp</string>
+    <string name="text_view_whatsapp_business">Business</string>
 
     <string name="activity_not_found_exception">Error open activity: \n%1$s</string>
     <string name="permission_call_phone">This activity requires phone permission</string>
