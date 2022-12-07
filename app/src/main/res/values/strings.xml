@@ -4,6 +4,7 @@
     <string name="floating_button_whatsapp">Open phone number in whatsapp</string>
     <string name="view_pager">View Pager</string>
     <string name="menu_search">Search</string>
+    <string name="menu_paste">Paste</string>
     <string name="tab_title_phone">Phone</string>
     <string name="tab_title_history">History</string>
     <string name="history_app">Your app history appears here</string>
@@ -11,6 +12,5 @@
     <string name="text_view_whatsapp_business">Business</string>
 
     <string name="activity_not_found_exception">Error open activity: \n%1$s</string>
-    <string name="permission_call_phone">This activity requires phone permission</string>
-    <string name="text_view_phone_number">Enter the phone number</string>
+    <string name="text_view_phone_number">Phone number</string>
 </resources>

@@ -11,6 +11,8 @@ import br.com.wellintonvieira.openphonezapp.ui.fragments.MainFragment
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private lateinit var mainFragment: MainFragment
+    private lateinit var historyFragment: HistoryFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,13 +23,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun configureViewPager() {
         val pageAdapter = PageAdapter(supportFragmentManager)
-        pageAdapter.addFragment(MainFragment(), getString(R.string.tab_title_phone))
-        pageAdapter.addFragment(HistoryFragment(), getString(R.string.tab_title_history))
+        mainFragment = MainFragment()
+        historyFragment = HistoryFragment()
+        pageAdapter.addFragment(mainFragment, getString(R.string.tab_title_phone))
+        pageAdapter.addFragment(historyFragment, getString(R.string.tab_title_history))
         binding.viewPagerMain.adapter = pageAdapter
         binding.tabLayoutMain.setupWithViewPager(binding.viewPagerMain)
     }
 
     fun currentItem(currentItem: Int) {
         binding.viewPagerMain.currentItem = currentItem
+    }
+
+    fun pasteClipboard() {
+        mainFragment.pasteClipboard()
     }
 }

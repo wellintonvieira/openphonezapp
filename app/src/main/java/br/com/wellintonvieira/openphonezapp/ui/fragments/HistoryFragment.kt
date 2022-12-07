@@ -22,6 +22,7 @@ class HistoryFragment: Fragment(), MenuProvider, SearchView.OnQueryTextListener 
 
     private lateinit var history: History
     private lateinit var binding: FragmentHistoryBinding
+    private lateinit var searchView: SearchView
     private val historyViewModel by viewModel<HistoryFragmentViewModel>()
     private val historyAdapter by lazy { HistoryAdapter(this::historyClickListener) }
     private val bottomSheetWhatsapp by lazy { BottomSheetWhatsapp(this::openIntent) }
@@ -76,16 +77,22 @@ class HistoryFragment: Fragment(), MenuProvider, SearchView.OnQueryTextListener 
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.menu_search, menu)
-        val search = menu.findItem(R.id.menu_search).actionView as SearchView
-        search.setOnQueryTextListener(this)
+        searchView = menu.findItem(R.id.menu_search).actionView as SearchView
+        searchView.setOnQueryTextListener(this)
     }
 
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-        return if(menuItem.itemId == R.id.menu_search) {
-            (activity as MainActivity).currentItem(2)
-            true
-        } else {
-            false
+        return when(menuItem.itemId) {
+            R.id.menu_paste -> {
+                (activity as MainActivity).currentItem(0)
+                (activity as MainActivity).pasteClipboard()
+                true
+            }
+            R.id.menu_search -> {
+                (activity as MainActivity).currentItem(1)
+                true
+            }
+            else -> false
         }
     }
 

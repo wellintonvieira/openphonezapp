@@ -14,7 +14,7 @@ class MainFragmentViewModel: ViewModel() {
         clear()
     }
 
-    fun add(number: Int) {
+    fun add(number: Char) {
         _numbers.value += "$number"
     }
 

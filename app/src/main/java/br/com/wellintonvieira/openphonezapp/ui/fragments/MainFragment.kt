@@ -1,23 +1,17 @@
 package br.com.wellintonvieira.openphonezapp.ui.fragments
 
-import android.Manifest
+import android.annotation.SuppressLint
 import android.content.ClipboardManager
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
+import android.view.*
 import androidx.fragment.app.Fragment
-import br.com.wellintonvieira.openphonezapp.R
 import br.com.wellintonvieira.openphonezapp.data.models.History
 import br.com.wellintonvieira.openphonezapp.databinding.FragmentMainBinding
 import br.com.wellintonvieira.openphonezapp.presentation.viewmodels.HistoryFragmentViewModel
 import br.com.wellintonvieira.openphonezapp.presentation.viewmodels.MainFragmentViewModel
 import br.com.wellintonvieira.openphonezapp.util.BottomSheetWhatsapp
-import br.com.wellintonvieira.openphonezapp.util.Constants
 import br.com.wellintonvieira.openphonezapp.util.openIntent
-import br.com.wellintonvieira.openphonezapp.util.showSnack
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
@@ -44,34 +38,12 @@ class MainFragment : Fragment() {
         configureListeners()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun configureListeners() {
         binding.floatingButtonOpenWhatsapp.setOnClickListener {
             val phoneNumber = binding.textViewPhoneNumber.text
             if (phoneNumber.isNotEmpty()) {
                 bottomSheetWhatsapp.create(binding.root.context)
-            }
-        }
-
-        binding.imageViewPhoneNumberPaste.setOnClickListener {
-            val clipboard = binding.root.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val text = clipboard.primaryClip?.getItemAt(0)
-            if (text != null) {
-                val phoneNumber = text.text.toString().replace("[^0-9]".toRegex(), "")
-                binding.textViewPhoneNumber.text = phoneNumber.trim()
-            }
-        }
-
-        binding.imageViewCallPhoneNumber.setOnClickListener {
-            val phoneNumber = binding.textViewPhoneNumber.text
-            if (phoneNumber.isNotEmpty()) {
-                requestPermission.launch(Manifest.permission.CALL_PHONE)
-            }
-        }
-
-        binding.imageViewPhoneNumberAdd.setOnClickListener {
-            val phoneNumber = binding.textViewPhoneNumber.text
-            if (phoneNumber.isNotEmpty()) {
-                openIntent(Constants.ACTION_CONTACT)
             }
         }
 
@@ -83,13 +55,22 @@ class MainFragment : Fragment() {
             mainFragmentViewModel.clear()
             return@setOnLongClickListener true
         }
+    }
 
-        binding.buttonClear.setOnClickListener {
-            mainFragmentViewModel.clear()
+    @SuppressLint("SetTextI18n")
+    fun pasteClipboard() {
+        val clipboard = binding.root.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val text = clipboard.primaryClip?.getItemAt(0)
+        if (text != null) {
+            val phoneNumber = text.text.toString().replace("[^0-9]".toRegex(), "")
+            binding.textViewPhoneNumber.text = "${binding.textViewPhoneNumber.text}${phoneNumber.trim()}"
+            for(number in phoneNumber) {
+                mainFragmentViewModel.add(number)
+            }
         }
     }
 
-    private fun onClickListener(keyNumber: Int) {
+    private fun onClickListener(keyNumber: Char) {
         mainFragmentViewModel.add(keyNumber)
     }
 
@@ -105,15 +86,5 @@ class MainFragment : Fragment() {
     private fun insertPhoneNumber(number: String) {
         val contact = History(phoneNumber = number.toLong())
         historyViewModel.insert(contact)
-    }
-
-    private val requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
-        if (result) {
-            openIntent(Constants.ACTION_CALL)
-        } else {
-            view?.let {
-                showSnack(it, getString(R.string.permission_call_phone))
-            }
-        }
     }
 }
